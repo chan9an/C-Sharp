@@ -12,12 +12,7 @@ namespace Day3
             x = y;         // assign y to x
             y = temp;      // assign temp (old x) to y
         }
-        public int AddToCart(params int[] prices){
-            int total = 0;
-            for each(int item in prices){
 
-            }
-        }
 
         static void Main(string[] args)
         {
@@ -53,8 +48,7 @@ namespace Day3
             Console.WriteLine("After Swapping:");
             Console.WriteLine("num1: {0}, num2: {1}", num1, num2);
             Program pObj = new Program();
-            pObj.AddToCart(10,20);
-            pObj.AddToCart(10,20,30,40,50);
+            
             
 
             
