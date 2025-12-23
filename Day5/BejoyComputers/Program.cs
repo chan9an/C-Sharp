@@ -10,7 +10,7 @@ class Program
         Console.WriteLine("2.Laptop");
         Console.WriteLine("Choose the option");
 
-        int choice = Convert.ToInt32(Console.ReadLine());
+        int choice = Int32.Parse(Console.ReadLine());
 
         if (choice == 1)
         {
@@ -20,43 +20,43 @@ class Program
             d.Processor = Console.ReadLine();
 
             Console.WriteLine("Enter the ram size");
-            d.RamSize = Convert.ToInt32(Console.ReadLine());
+            d.RamSize = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the hard disk size");
-            d.hardDiskSize = Convert.ToInt32(Console.ReadLine());
+            d.hardDiskSize = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the graphic card size");
-            d.GraphicCard = Convert.ToInt32(Console.ReadLine());
+            d.GraphicCard = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the monitor size");
-            d.MonitorSize = Convert.ToInt32(Console.ReadLine());
+            d.MonitorSize = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the power supply volt");
-            d.PowerSupplyVolt = Convert.ToInt32(Console.ReadLine());
+            d.PowerSupplyVolt = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Desktop price is " + d.DesktopPriceCalculation());
         }
         else if (choice == 2)
-        {
+        { 
             Laptop l = new Laptop();
 
             Console.WriteLine("Enter the processor");
             l.Processor = Console.ReadLine();
 
             Console.WriteLine("Enter the ram size");
-            l.RamSize = Convert.ToInt32(Console.ReadLine());
+            l.RamSize = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the hard disk size");
-            l.hardDiskSize = Convert.ToInt32(Console.ReadLine());
+            l.hardDiskSize = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the graphic card size");
-            l.GraphicCard = Convert.ToInt32(Console.ReadLine());
+            l.GraphicCard = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the display size");
-            l.DisplaySize = Convert.ToInt32(Console.ReadLine());
+            l.DisplaySize = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the battery volt");
-            l.BatteryVolt = Convert.ToInt32(Console.ReadLine());
+            l.BatteryVolt = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Laptop price is " + l.LaptopPriceCalculation());
         }
