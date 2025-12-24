@@ -24,7 +24,7 @@ class Program
         Console.WriteLine("Enter the daily late feeRate");
         double rate = double.Parse(Console.ReadLine());
 
-
+        
         Book bObj = new Book(title, author, pages, due, returned);
 
         Console.WriteLine($"Average Pages Read Per Day : {bObj.AveragePagesReadPerDay(days)}");
