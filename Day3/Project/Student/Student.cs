@@ -86,13 +86,6 @@ public class Student
 
     int t1;//Total
     float p1; //Percentage
-    public void CalcResult(out t1, out p1)
-    {
-           
-
-
-    }
-
         
     }
     #endregion

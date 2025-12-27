@@ -1,4 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+// See https://aka.ms/new-console-template for more information
 //Console.WriteLine("Hello, World!");
 using Day4.Project;
 
@@ -20,15 +20,18 @@ pObj.price = 10000;
 
 //Approach 2 Object init
 Product pObj1 = new Product() { ProdID = 102, name = "Phone", price = 8000 };
-List<Product> products= new List<Product>()
+List<Product> products = new List<Product>()
 {
-    new Product(){ ProdID = 102, name = "Phone", price = 8000 },
-    new Product(){ ProdID = 102, name = "Phone", price = 8000 },
-    new Product(){ ProdID = 102, name = "Phone", price = 8000 },
-    new Product(){ ProdID = 102, name = "Phone", price = 8000 },
-    new Product(){ ProdID = 102, name = "Phone", price = 8000 },
-    new Product(){ ProdID = 102, name = "Phone", price = 8000 },
-    new Product(){ ProdID = 102, name = "Phone", price = 8000 }
-    ;
-}
+    new Product(){ ProdID = 103, name = "Laptop", price = 50000 },
+    new Product(){ ProdID = 104, name = "Tablet", price = 20000 },
+    new Product(){ ProdID = 105, name = "Smartwatch", price = 15000 },
+    new Product(){ ProdID = 106, name = "Headphones", price = 5000 },
+    new Product(){ ProdID = 107, name = "Gaming Console", price = 30000 },
+    new Product(){ ProdID = 108, name = "Smart TV", price = 40000 },
+    new Product(){ ProdID = 109, name = "Bluetooth Speaker", price = 7000 }
+};
 
+foreach (var items in products)
+{
+    System.Console.WriteLine("Products");
+}
