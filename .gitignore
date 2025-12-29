@@ -3,6 +3,7 @@
 # ==============================
 bin/
 obj/
+QuestionBank/
 
 # ==============================
 # Visual Studio files
