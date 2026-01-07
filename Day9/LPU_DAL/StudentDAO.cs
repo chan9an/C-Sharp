@@ -21,7 +21,7 @@ public class StudentDAO  : IStudentCRUD
         new Student(){StudentID=106,Name="Akshay",Course=CourseType.Mechenical,Address="Solan"},
     };
     }
-    public bool DropStudentDetails(int id)
+    public bool DropStudentDetails(int id)   
     {
         throw new NotImplementedException();
     }
