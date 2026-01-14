@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Forms.MainWindow"
+        Width="400" Height="300"
+        Title="Forms">
+
+    <StackPanel Margin="20">
+        <TextBlock Text="Employee ID"/>
+        <TextBox Name="employeeIdBox"/>
+
+        <TextBlock Text="Name" Margin="0,10,0,0"/>
+        <TextBox Name="nameBox"/>
+
+        <TextBlock Text="Salary" Margin="0,10,0,0"/>
+        <TextBox Name="salaryBox"/>
+
+        <Button Content="Submit" Margin="0,15,0,0"
+                Click="Submit_Click"/>
+        <Button Content = "Bin Serialize" Click="Submit_Click"/>
+        <Button Content="Button2" Click="Submit_Click"/>
+        <Button Content="Button3" Click="Submit_Click"/>
+        <Button Content="Button4" Click="Submit_Click"/>
+        <Button Content="Button5" Click="Submit_Click"/>
+    </StackPanel>
+</Window>
