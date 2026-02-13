@@ -1,72 +1,88 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ArcDemo
 {
     public class StudentDAL
     {
-
         SqlConnection con = null;
         SqlCommand cmd = null;
         SqlDataReader sdr = null;
 
         public StudentDAL()
         {
-            string conStr = "Data Source=.\\sqlexpress;Initial Catalog=LPU_DB;Integrated Security=True;Trust Server Certificate=True"; // old version mein integrated security = true kaam nhi krta usmein ssip kaam ata hai
-            con = new SqlConnection();
-            con.ConnectionString = "Server=.\\sqlexpress;Integrated Security=True;Database=LPU_DB;TrustServerCertificate=True;";
+            con = new SqlConnection("Server=.\\sqlexpress;Integrated Security=True;Database=LPU_DB;TrustServerCertificate=True;");
         }
-
 
         public List<Student> ShowAllStudents()
         {
-            List<Student> studList = null;
-            //Code for connected Architecture below
+            List<Student> studList = new List<Student>();
 
             try
             {
                 con.Open();
-                cmd = new SqlCommand();
-                cmd.CommandText = "Select * from StudentInfo";
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.Text;
 
+                cmd = new SqlCommand("Select * from StudentInfo", con);
                 sdr = cmd.ExecuteReader();
-                DataTable myDt = new DataTable();
-                //Converting the database row into the list so that we cn access
-                foreach(DataRow row in sdr)
+
+                while (sdr.Read())
                 {
                     Student sObj = new Student()
                     {
-                        RollNo = Convert.ToInt32(row[0].ToString()),
-                        Name = row[1].ToString(),
-                        Address = row[2].ToString(),
-                        PhoneNo = row[4].ToString(),
-
-
-
+                        RollNo = Convert.ToInt32(sdr[0]),
+                        Name = sdr[1].ToString(),
+                        Address = sdr[3].ToString(),
+                        PhoneNo = sdr[5].ToString()
                     };
-                    if (sObj != null)
-                    {
-                        studList.Add(sObj);
 
-                    }
-
+                    studList.Add(sObj);
                 }
-                myDt.Load(sdr);
-
             }
             catch (Exception e)
             {
-                throw e;
-
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
             }
 
+            return studList;
+        }
+
+        public List<Student> SearchByName(string name)
+        {
+            List<Student> studList = new List<Student>();
+
+            try
+            {
+                con.Open();
+
+                cmd = new SqlCommand("Select * from StudentInfo where Name = @Name", con);
+                cmd.Parameters.AddWithValue("@Name", name);
+
+                sdr = cmd.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                    Student sObj = new Student()
+                    {
+                        RollNo = Convert.ToInt32(sdr[0]),
+                        Name = sdr[1].ToString(),
+                        Address = sdr[3].ToString(),
+                        PhoneNo = sdr[5].ToString()
+                    };
+
+                    studList.Add(sObj);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             finally
             {
                 con.Close();
@@ -76,25 +92,81 @@ namespace ArcDemo
         }
 
 
-
-        public List<Student> SearchByName(string Name)
-        {
-            List<Student> studList = null;
-
-            return studList;
-        }
-
-
-        public Student SearchByID(int ID)
+        public Student SearchByID(int id)
         {
             Student student = null;
 
+            try
+            {
+                con.Open();
+
+                cmd = new SqlCommand("Select * from StudentInfo where RollNo = @id", con);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                sdr = cmd.ExecuteReader();
+
+                if (sdr.Read())
+                {
+                    student = new Student()
+                    {
+                        RollNo = Convert.ToInt32(sdr[0]),
+                        Name = sdr[1].ToString(),
+                        Address = sdr[2].ToString(),
+                        PhoneNo = sdr[3].ToString()
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
 
             return student;
-
         }
 
+        public bool AddStudent(Student student)
+        {
+
+             bool flag = false;
+            con.Open();
+            SqlParameter[] param = new SqlParameter[5];
+
+            for(int i =0; i < param.Length; i++)
+            {
+                param[i] = new SqlParameter();
+
+            }
+
+            param[0].ParameterName = "@RollNo";
+            param[0].Value=student.RollNo;
+            param[1].ParameterName = "@Name";
+            param[1].Value = student.Name;
+            param[2].ParameterName = "@Age";
+            param[2].Value = student.Age;
+            param[3].ParameterName = "@Addr";
+            param[3].Value = student.Address;
+            param[4].ParameterName = "@PhoneNo";
+            param[4].Value = student.PhoneNo;
+            cmd = new SqlCommand();
+            cmd.CommandText = $"Insert into StudentInfo(RollNo,Name,Age,PerAddress,PhoneNo) values({param[0].ParameterName},{param[1].ParameterName},{param[2].ParameterName},{param[3].ParameterName},{param[4].ParameterName})";
+            cmd.Connection = con;
+            cmd.Parameters.AddRange(param);
+            int rows =cmd.ExecuteNonQuery();
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
 
+
+        }
     }
 }
