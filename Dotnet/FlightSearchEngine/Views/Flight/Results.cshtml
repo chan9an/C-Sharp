@@ -1,0 +1,94 @@
+@{
+    ViewData["Title"] = "Search Results";
+    var searchType = ViewBag.SearchType as string;
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Flight" asp-action="Index">Search</a></li>
+            <li class="breadcrumb-item active">Results</li>
+        </ol>
+    </nav>
+
+    <h2 class="mb-4">Search Results</h2>
+
+    @if (searchType == "Flight")
+    {
+        var flights = Model as List<FlightSearchEngine.Models.FlightResult>;
+
+        if (flights == null || flights.Count == 0)
+        {
+            <div class="alert alert-warning">No flights found for the selected route.</div>
+        }
+        else
+        {
+            <h5>Flights Found: @flights.Count</h5>
+            <table class="table table-bordered table-striped mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Flight ID</th>
+                        <th>Flight Name</th>
+                        <th>Flight Type</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Total Cost (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var f in flights)
+                    {
+                        <tr>
+                            <td>@f.FlightId</td>
+                            <td>@f.FlightName</td>
+                            <td>@f.FlightType</td>
+                            <td>@f.Source</td>
+                            <td>@f.Destination</td>
+                            <td>@f.TotalCost.ToString("N2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+    else if (searchType == "FlightHotel")
+    {
+        var packages = Model as List<FlightSearchEngine.Models.FlightHotelResult>;
+
+        if (packages == null || packages.Count == 0)
+        {
+            <div class="alert alert-warning">No flight + hotel packages found for the selected route.</div>
+        }
+        else
+        {
+            <h5>Packages Found: @packages.Count</h5>
+            <table class="table table-bordered table-striped mt-3">
+                <thead class="table-warning">
+                    <tr>
+                        <th>Flight ID</th>
+                        <th>Flight Name</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Hotel Name</th>
+                        <th>Total Cost (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in packages)
+                    {
+                        <tr>
+                            <td>@p.FlightId</td>
+                            <td>@p.FlightName</td>
+                            <td>@p.Source</td>
+                            <td>@p.Destination</td>
+                            <td>@p.HotelName</td>
+                            <td>@p.TotalCost.ToString("N2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+
+    <a asp-controller="Flight" asp-action="Index" class="btn btn-secondary mt-3">⬅ Back to Search</a>
+</div>
