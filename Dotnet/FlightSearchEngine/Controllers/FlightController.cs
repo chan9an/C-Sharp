@@ -46,7 +46,7 @@ namespace FlightSearchEngine.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SearchFlightsWithHotels(SearchViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsVa9lid)
             {
                 var sources = await _db.GetSourcesAsync();
                 var destinations = await _db.GetDestinationsAsync();
